@@ -1,0 +1,1 @@
+from blog.templatetags import blog_template_tags
