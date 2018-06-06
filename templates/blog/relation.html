@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+
+{#meta#}
+{% block meta %}
+
+{% endblock %}
+
+
+{#title#}
+{% block title %}
+    <title>联系作者 - 博客笔记</title>
+
+{% endblock %}
+
+
+{#css#}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
+
+
+{% endblock %}
+
+
+{% block boke %}
+    {#        联系显示#}
+    <header id="site-header">
+        <div class="row">
+            <div class="col-md-4 col-sm-5 col-xs-8">
+                <div class="logo">
+                    <h1><a href="blog/index.html"><b>博客笔记需要您的宝贵意见</b></a></h1>
+                </div>
+            </div><!-- col-md-4 -->
+            <div class="col-md-8 col-sm-7 col-xs-4">
+                <nav class="main-nav" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" id="trigger-overlay" class="navbar-toggle">
+                            <span class="ion-navicon"></span>
+                        </button>
+                    </div>
+
+                    {#                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">#}
+                    {#                            <ul class="nav navbar-nav navbar-right">#}
+                    {#                                                    <li class="cl-effect-11"><a href="{% url 'login' %}" data-hover="忘记密码">忘记密码</a></li>#}
+                    {#                                <li class="cl-effect-11"><a href="{% url 'login' %}" data-hover="主页">主页</a></li>#}
+
+                    {#                            <li class="cl-effect-11"><a href="{% url 'user:register' %}" data-hover="注册新账号">注册新账号</a></li>#}
+                    {#                            </ul>#}
+                    {#                        </div><!-- /.navbar-collapse -->#}
+                </nav>
+                {#                <div id="header-search-box">#}
+                {#                    <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>#}
+                {#                    <div id="search-form" class="search-form">#}
+                {#                        <form role="search" method="post" id="searchform" action="/blog/search/">#}
+                {#                            {% csrf_token %}#}
+                {#                            <input type="search" name="search" placeholder="搜索" required>#}
+                {#          if                  <button type="submit"><span class="ion-ios-search-strong"></span></button>#}
+                {#                        </form>#}
+                {#                    </div>#}
+                {#                </div>#}
+            </div><!-- col-md-8 -->
+        </div>
+    </header>
+        <div class="flex-center">
+        <div class="container">
+            <div>
+                <h1 class="logo"><a href="#">热烈欢迎提交意见 </a></h1>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="flex-center">
+        <div>
+            <h1>联系方式： <span class="glyphicon glyphicon-envelope"
+                            aria-hidden="true"></span><span>luzulin33@163.com</span></h1>
+
+        </div>
+    </div>
+{% endblock %}
+
+
+{#js_one#}
+{% block js_one %}
+
+{% endblock %}
+
+
+{#js_end#}
+{% block js_end %}
+{% endblock %}
+
+
+{#content#}
+{#{% block content %}#}
+{##}
+{##}
+{#{% endblock %}#}
+

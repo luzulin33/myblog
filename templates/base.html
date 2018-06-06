@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+{% load static %}
+{% load blog_template_tags %}
+<html>
+<head>
+    {% block title %}
+        <title>首页 - 博客笔记</title>
+    {% endblock %}
+    <!-- meta -->
+    {% block meta %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endblock %}
+    <!-- css -->
+    {% block css %}
+        <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+        <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <link rel="stylesheet" href="{% static "css/pace.css" %}">
+        <link rel="stylesheet" href="{% static "css/custom.css" %}">
+
+        {#    代码高亮文件#}
+        <link rel="stylesheet" href="{% static 'css/highlights/github.css' %}">
+    {% endblock %}
+    <!-- js -->
+    {% block js_one %}
+        <script src="{% static "js/jquery-2.1.3.min.js" %}"></script>
+        <script src="{% static "js/bootstrap.min.js" %}"></script>
+        <script src="{% static "js/pace.min.js" %}"></script>
+        <script src="{% static "js/modernizr.custom.js" %}"></script>
+    {% endblock %}
+</head>
+
+<body>
+
+<div class="container">
+{% block boke %}
+    {#    登陆隐藏#}
+    {% if form.username.label_tag %}
+        <header id="site-header">
+            <div class="row">
+                <div class="col-md-4 col-sm-5 col-xs-8">
+                    <div class="logo">
+                        <h1><a href="blog/index.html"><b>欢迎回来</b></a></h1>
+                    </div>
+                </div><!-- col-md-4 -->
+                <div class="col-md-8 col-sm-7 col-xs-4">
+                    <nav class="main-nav" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" id="trigger-overlay" class="navbar-toggle">
+                                <span class="ion-navicon"></span>
+                            </button>
+                        </div>
+
+                        {#                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">#}
+                        {#                        <ul class="nav navbar-nav navbar-right">#}
+                        {#                            <li class="cl-effect-11"><a href="{% url 'login' %}" data-hover="忘记密码">忘记密码</a></li>#}
+                        {#                            <li class="cl-effect-11"><a href="{% url 'user:register' %}" data-hover="注册新账号">注册新账号</a></li>#}
+                        {#                        </ul>#}
+                        {#                    </div><!-- /.navbar-collapse -->#}
+                    </nav>
+                    {#                <div id="header-search-box">#}
+                    {#                    <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>#}
+                    {#                    <div id="search-form" class="search-form">#}
+                    {#                        <form role="search" method="post" id="searchform" action="/blog/search/">#}
+                    {#                            {% csrf_token %}#}
+                    {#                            <input type="search" name="search" placeholder="搜索" required>#}
+                    {#          if                  <button type="submit"><span class="ion-ios-search-strong"></span></button>#}
+                    {#                        </form>#}
+                    {#                    </div>#}
+                    {#                </div>#}
+                </div><!-- col-md-8 -->
+            </div>
+        </header>
+        {#        注册隐藏#}
+    {% elif userForm %}
+        <header id="site-header">
+            <div class="row">
+                <div class="col-md-4 col-sm-5 col-xs-8">
+                    <div class="logo">
+                        <h1><a href="blog/index.html"><b>欢迎注册</b></a></h1>
+                    </div>
+                </div><!-- col-md-4 -->
+                <div class="col-md-8 col-sm-7 col-xs-4">
+                    <nav class="main-nav" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" id="trigger-overlay" class="navbar-toggle">
+                                <span class="ion-navicon"></span>
+                            </button>
+                        </div>
+
+                        {#                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">#}
+                        {#                        <ul class="nav navbar-nav navbar-right">#}
+                        {#                            <li class="cl-effect-11"><a href="{% url 'login' %}" data-hover="忘记密码">忘记密码</a></li>#}
+                        {#                            <li class="cl-effect-11"><a href="{% url 'user:register' %}" data-hover="注册新账号">注册新账号</a></li>#}
+                        {#                        </ul>#}
+                        {#                    </div><!-- /.navbar-collapse -->#}
+                    </nav>
+                    {#                <div id="header-search-box">#}
+                    {#                    <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>#}
+                    {#                    <div id="search-form" class="search-form">#}
+                    {#                        <form role="search" method="post" id="searchform" action="/blog/search/">#}
+                    {#                            {% csrf_token %}#}
+                    {#                            <input type="search" name="search" placeholder="搜索" required>#}
+                    {#          if                  <button type="submit"><span class="ion-ios-search-strong"></span></button>#}
+                    {#                        </form>#}
+                    {#                    </div>#}
+                    {#                </div>#}
+                </div><!-- col-md-8 -->
+            </div>
+        </header>
+
+
+
+        {#        进入个人信息显示，隐藏其他#}
+    {% elif userInfoForm %}
+        <header id="site-header">
+            <div class="row">
+                <div class="col-md-4 col-sm-5 col-xs-8">
+                    <div class="logo">
+                        <h1><a href="blog/index.html"><b>个人信息管理</b></a></h1>
+                    </div>
+                </div><!-- col-md-4 -->
+                <div class="col-md-8 col-sm-7 col-xs-4">
+                    <nav class="main-nav" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" id="trigger-overlay" class="navbar-toggle">
+                                <span class="ion-navicon"></span>
+                            </button>
+                        </div>
+
+                        {#                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">#}
+                        {#                        <ul class="nav navbar-nav navbar-right">#}
+                        {#                            <li class="cl-effect-11"><a href="{% url 'login' %}" data-hover="忘记密码">忘记密码</a></li>#}
+                        {#                            <li class="cl-effect-11"><a href="{% url 'user:register' %}" data-hover="注册新账号">注册新账号</a></li>#}
+                        {#                        </ul>#}
+                        {#                    </div><!-- /.navbar-collapse -->#}
+                    </nav>
+                    {#                <div id="header-search-box">#}
+                    {#                    <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>#}
+                    {#                    <div id="search-form" class="search-form">#}
+                    {#                        <form role="search" method="post" id="searchform" action="/blog/search/">#}
+                    {#                            {% csrf_token %}#}
+                    {#                            <input type="search" name="search" placeholder="搜索" required>#}
+                    {#          if                  <button type="submit"><span class="ion-ios-search-strong"></span></button>#}
+                    {#                        </form>#}
+                    {#                    </div>#}
+                    {#                </div>#}
+                </div><!-- col-md-8 -->
+            </div>
+        </header>
+
+
+
+        {#密码修改#}
+    {% elif form %}
+        <header id="site-header">
+            <div class="row">
+                <div class="col-md-4 col-sm-5 col-xs-8">
+                    <div class="logo">
+                        <h1><a href="blog/index.html"><b>密码修改</b></a></h1>
+                    </div>
+                </div><!-- col-md-4 -->
+                <div class="col-md-8 col-sm-7 col-xs-4">
+                    <nav class="main-nav" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" id="trigger-overlay" class="navbar-toggle">
+                                <span class="ion-navicon"></span>
+                            </button>
+                        </div>
+
+                        {#                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">#}
+                        {#                        <ul class="nav navbar-nav navbar-right">#}
+                        {#                            <li class="cl-effect-11"><a href="{% url 'login' %}" data-hover="忘记密码">忘记密码</a></li>#}
+                        {#                            <li class="cl-effect-11"><a href="{% url 'user:register' %}" data-hover="注册新账号">注册新账号</a></li>#}
+                        {#                        </ul>#}
+                        {#                    </div><!-- /.navbar-collapse -->#}
+                    </nav>
+                    {#                <div id="header-search-box">#}
+                    {#                    <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>#}
+                    {#                    <div id="search-form" class="search-form">#}
+                    {#                        <form role="search" method="post" id="searchform" action="/blog/search/">#}
+                    {#                            {% csrf_token %}#}
+                    {#                            <input type="search" name="search" placeholder="搜索" required>#}
+                    {#          if                  <button type="submit"><span class="ion-ios-search-strong"></span></button>#}
+                    {#                        </form>#}
+                    {#                    </div>#}
+                    {#                </div>#}
+                </div><!-- col-md-8 -->
+            </div>
+        </header>
+
+
+
+
+
+        {#        密码修改成功#}
+    {% elif title %}
+
+
+
+
+        <header id="site-header">
+            <div class="row">
+                <div class="col-md-4 col-sm-5 col-xs-8">
+                    <div class="logo">
+                        <h1><a href="blog/index.html"><b>操作成功</b></a></h1>
+                    </div>
+                </div><!-- col-md-4 -->
+                <div class="col-md-8 col-sm-7 col-xs-4">
+                    <nav class="main-nav" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" id="trigger-overlay" class="navbar-toggle">
+                                <span class="ion-navicon"></span>
+                            </button>
+                        </div>
+
+                        {#                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">#}
+                        {#                            <ul class="nav navbar-nav navbar-right">#}
+                        {#                                                    <li class="cl-effect-11"><a href="{% url 'login' %}" data-hover="忘记密码">忘记密码</a></li>#}
+                        {#                                <li class="cl-effect-11"><a href="{% url 'login' %}" data-hover="主页">主页</a></li>#}
+
+                        {#                            <li class="cl-effect-11"><a href="{% url 'user:register' %}" data-hover="注册新账号">注册新账号</a></li>#}
+                        {#                            </ul>#}
+                        {#                        </div><!-- /.navbar-collapse -->#}
+                    </nav>
+                    {#                <div id="header-search-box">#}
+                    {#                    <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>#}
+                    {#                    <div id="search-form" class="search-form">#}
+                    {#                        <form role="search" method="post" id="searchform" action="/blog/search/">#}
+                    {#                            {% csrf_token %}#}
+                    {#                            <input type="search" name="search" placeholder="搜索" required>#}
+                    {#          if                  <button type="submit"><span class="ion-ios-search-strong"></span></button>#}
+                    {#                        </form>#}
+                    {#                    </div>#}
+                    {#                </div>#}
+                </div><!-- col-md-8 -->
+            </div>
+        </header>
+
+
+
+        {#        注册成功#}
+    {% elif succee_register %}
+        <header id="site-header">
+            <div class="row">
+                <div class="col-md-4 col-sm-5 col-xs-8">
+                    <div class="logo">
+                        <h1><a href="blog/index.html"><b>注册成功</b></a></h1>
+                    </div>
+                </div><!-- col-md-4 -->
+                <div class="col-md-8 col-sm-7 col-xs-4">
+                    <nav class="main-nav" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" id="trigger-overlay" class="navbar-toggle">
+                                <span class="ion-navicon"></span>
+                            </button>
+                        </div>
+
+                        {#                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">#}
+                        {#                            <ul class="nav navbar-nav navbar-right">#}
+                        {#                                                    <li class="cl-effect-11"><a href="{% url 'login' %}" data-hover="忘记密码">忘记密码</a></li>#}
+                        {#                                <li class="cl-effect-11"><a href="{% url 'login' %}" data-hover="主页">主页</a></li>#}
+
+                        {#                            <li class="cl-effect-11"><a href="{% url 'user:register' %}" data-hover="注册新账号">注册新账号</a></li>#}
+                        {#                            </ul>#}
+                        {#                        </div><!-- /.navbar-collapse -->#}
+                    </nav>
+                    {#                <div id="header-search-box">#}
+                    {#                    <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>#}
+                    {#                    <div id="search-form" class="search-form">#}
+                    {#                        <form role="search" method="post" id="searchform" action="/blog/search/">#}
+                    {#                            {% csrf_token %}#}
+                    {#                            <input type="search" name="search" placeholder="搜索" required>#}
+                    {#          if                  <button type="submit"><span class="ion-ios-search-strong"></span></button>#}
+                    {#                        </form>#}
+                    {#                    </div>#}
+                    {#                </div>#}
+                </div><!-- col-md-8 -->
+            </div>
+        </header>
+
+    {% else %}
+        {#        正常显示#}
+        <header id="site-header">
+            <div class="row">
+                <div class="col-md-4 col-sm-5 col-xs-8">
+                    <div class="logo">
+                        <h1><a href="blog/index.html"><b>博客笔记</b></a></h1>
+                    </div>
+                </div><!-- col-md-4 -->
+                <div class="col-md-8 col-sm-7 col-xs-4">
+                    <nav class="main-nav" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" id="trigger-overlay" class="navbar-toggle">
+                                <span class="ion-navicon"></span>
+                            </button>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="cl-effect-11"><a href="/blog/index/" data-hover="首页">首页</a></li>
+                                <li class="cl-effect-11"><a href="#" data-hover="博客">博客</a></li>
+                                <li class="cl-effect-11"><a href="#" data-hover="关于">关于</a></li>
+                                <li class="cl-effect-11"><a href="/blog/relation/" data-hover="联系">联系</a></li>
+                                {% if user.username %}
+                                    <li class="cl-effect-11"><a href="{% url 'logout' %}" data-hover="注销">注销</a></li>
+                                    <li class="cl-effect-11"><a href="{% url 'user:personInfo' %}"
+                                                                data-hover="{{ user.username }}">{{ user.username }}</a>
+                                    </li>
+                                {% else %}
+                                    <li class="cl-effect-11"><a href="{% url 'login' %}" data-hover="登陆">登陆</a></li>
+                                    <li class="cl-effect-11"><a href="{% url 'user:register' %}" data-hover="注册">注册</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </nav>
+                    <div id="header-search-box">
+                        <a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>
+                        <div id="search-form" class="search-form">
+                            <form role="search" method="post" id="searchform" action="/blog/search/">
+                                {% csrf_token %}
+                                <input type="search" name="search" placeholder="搜索" required>
+                                <button type="submit"><span class="ion-ios-search-strong"></span></button>
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- col-md-8 -->
+            </div>
+        </header>
+
+    {% endif %}
+</div>
+<div class="copyrights">Collect from <a href="http://www.cssmoban.com/">网页模板</a></div>
+
+<div class="content-body">
+    <div class="container">
+        <div class="row">
+            <main class="col-md-8">
+                {% block content %}
+                    {{ error_msg }}
+                {% endblock %}
+                {% block post_comment %}
+                {% endblock %}
+
+                {% block userRegister %}
+
+                {% endblock %}
+                {% block user_login %}
+                {% endblock %}
+                <!-- 简单分页效果
+                <div class="pagination-simple">
+                    <a href="#">上一页</a>
+                    <span class="current">第 6 页 / 共 11 页</span>
+                    <a href="#">下一页</a>
+                </div>
+                -->
+
+                {#                <div class="pagination">#}
+                {#                    {% if search_paginator %}#}
+                {##}
+                {#                        <nav aria-label="Page navigation">#}
+                {#                            <ul class="pagination">#}
+                {#                                <li>#}
+                {#                                    <a href="#" aria-label="Previous">#}
+                {#                                        <span aria-hidden="true">&laquo;</span>#}
+                {#                                    </a>#}
+                {#                                </li>#}
+                {#                                {% for page_n in page_num %}#}
+                {#                                    <li><a href="/blog/search/?page={{ forloop.counter }}">{{ forloop.counter }}</a>#}
+                {#                                    </li>#}
+                {#                                {% endfor %}#}
+                {#                                <li>#}
+                {#                                    <a href="#" aria-label="Next">#}
+                {#                                        <span aria-hidden="true">&raquo;</span>#}
+                {#                                    </a>#}
+                {#                                </li>#}
+                {#                            </ul>#}
+                {#                        </nav>#}
+                {#                    {% endif %}#}
+                {#                </div>#}
+            </main>
+            <aside class="col-md-4">
+                <div class="widget widget-recent-posts">
+                    <h3 class="widget-title">最新文章</h3>
+                    {% get_recent_post as recent_post %}
+                    <ul>
+                        {% for r_post in recent_post %}
+                            <li>
+                                <a href="/blog/detail/?post={{ r_post.id }}">{{ r_post.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="widget widget-archives">
+                    <h3 class="widget-title">归档</h3>
+                    {% post_time as po_time %}
+                    <ul>
+                        {% for p_time in po_time %}
+                            <li>
+                                {#                            <a href="/blog/p_time/?year={{ p_time.year }}&month={{ p_time.month }}">{{ p_time.year }}年{{ p_time.month }}月</a>#}
+                                <a href="{% url 'blog:p_time' p_time.year p_time.month p_time.day %}">{{ p_time.year }}年{{ p_time.month }}月{{ p_time.day }}日</a>
+
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="widget widget-category">
+                    <h3 class="widget-title">分类{{ category.post_counts }}</h3>
+                    <ul>
+                        {% post_category as po_category %}
+                        {% for p_category in po_category %}
+                            <li>
+                                <a href="/blog/p_category/?p_category={{ p_category.name }}">{{ p_category.name }} <span
+                                        class="post-count">({{ forloop.counter }})</span></a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="widget widget-tag-cloud">
+                    <h3 class="widget-title">标签云</h3>
+                    <ul>
+                        {% post_tags as po_tags %}
+                        {% for p_tag in po_tags %}
+
+                            <li>
+                                <a href="/blog/p_tags/?tag={{ p_tag.name }}">{{ p_tag.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="rss">
+                    <a href="{{ post.get_absolute_url }}"><span class="ion-social-rss-outline"></span> RSS 订阅</a>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>
+
+<footer id="site-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="copyright">&copy 2017 - 采集自<a href="http://www.cssmoban.com/"
+                                                        target="_blank" title="模板之家">模板之家</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Mobile Menu -->
+<div class="overlay overlay-hugeinc">
+    <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
+    <nav>
+        <ul>
+            <li><a href="blog/index.html">首页</a></li>
+            <li><a href="full-width.html">博客</a></li>
+            <li><a href="about.html">关于</a></li>
+            <li><a href="contact.html">联系</a></li>
+        </ul>
+    </nav>
+</div>
+{% endblock %}
+{% block js_end %}
+    <script src="{% static "js/script.js" %}"></script>
+{% endblock %}
+</body>
+</html>

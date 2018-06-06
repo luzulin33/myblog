@@ -1,0 +1,58 @@
+
+
+{% extends 'base.html' %}
+
+
+{#meta#}
+{% block meta %}
+
+{% endblock %}
+
+
+{#title#}
+{% block title %}
+    <title>注册成功 - 博客笔记</title>
+
+{% endblock %}
+
+
+{#css#}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
+
+
+{% endblock %}
+
+
+{#content#}
+{% block content %}
+    <div class="flex-center">
+        <div class="container">
+            <div>
+                <h1 class="logo"><a href="{% url 'blog:index' %}">成功注册</a></h1>
+            </div>
+        </div>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            {#                                                    <li class="cl-effect-11"><a href="{% url 'login' %}" data-hover="忘记密码">忘记密码</a></li>#}
+            <li class="cl-effect-11"><a href="{% url 'login' %}" data-hover="">点击登陆</a></li>
+
+            {#                            <li class="cl-effect-11"><a href="{% url 'user:register' %}" data-hover="注册新账号">注册新账号</a></li>#}
+        </ul>
+    </div><!-- /.navbar-collapse -->
+{% endblock %}
+
+
+{#js_one#}
+{% block js_one %}
+
+{% endblock %}
+
+
+{#js_end#}
+{% block js_end %}
+
+{% endblock %}
+

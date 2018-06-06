@@ -1,0 +1,148 @@
+{#{% extends 'base.html' %}#}
+{#{% block userRegister %}#}
+{#<form action="/user/register" method="post" enctype="multipart/form-data">#}
+{#    {% csrf_token %}#}
+{#    {% for field in userForm %}#}
+{#    {{ field.label_tag }}#}
+{#    {{ field }}#}
+{#        {{ field.errors}}#}
+{##}
+{#    {% endfor %}#}
+{#</form>#}
+{#    <form class="form" action="/user/register" method="post" enctype="multipart/form-data">#}
+{#        {% csrf_token %}#}
+{#        {% for field in userForm %}#}
+{#            {{ field.label_tag }}#}
+{#            {{ field }}#}
+{#            {{ field.errors }}#}
+{#            {% if field.help_text %}#}
+{#                <p class="help text-small text-muted">{{ field.help_text|safe }}</p>#}
+{#            {% endif %}#}
+{#        {% endfor %}#}
+{#        <button type="submit" class="btn btn-primary btn-block">注册</button>#}
+{#        <input type="hidden" name="next" value="{{ next }}"/>#}
+{#    </form>#}
+{#    #}
+{#    #}
+{#    #}
+{#    #}
+{##}
+{#{% endblock %}#}
+{##}
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="zh-cn">#}
+{#<head>#}
+{#    <meta charset="utf-8">#}
+{#    <meta http-equiv="x-ua-compatible" content="ie=edge">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">#}
+{#    <title>注册</title>#}
+{#    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">#}
+{#    <style>#}
+{#        .errorlist {#}
+{#            color: red;#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{#<div class="flex-center">#}
+{#    <div class="container">#}
+{#        <div class="flex-center">#}
+{#            <div class="unit-1-2 unit-1-on-mobile">#}
+{#                <h1><a href="{% url 'blog:index' %}">注冊讀書博客</a></h1>#}
+{#                <h3>注册</h3>#}
+{#            {%  if error_msg  %}#}
+{#            {{ error_msg }}#}
+{#            {% endif %}#}
+{#                <form class="form" action="{% url 'user:register' %}" method="post" enctype="multipart/form-data" >#}
+{#                    {% csrf_token %}#}
+{#                {% for error in userForm.errors %}#}
+{#                    {{ error }}#}
+{#                {% endfor %}#}
+{#                    {% for field in userForm %}#}
+{#                        {{ field.label_tag }}#}
+{#                        {{ field }}#}
+{#                        {{ field.errors }}#}
+{#                        {{ field.help_text | safe }}#}
+{#                        {% if field.help_text %}#}
+{#                            <p class="help text-small text-muted">{{ field.help_text|safe }}</p>#}
+{#                        {% endif %}#}
+{#                    {% endfor %}#}
+{#                    <button type="submit" class="btn btn-primary btn-block">注册</button>#}
+{#                    <input type="hidden" name="next" value="{{ next }}"/>#}
+{#                </form>#}
+{#                <div class="flex-center top-gap text-small">#}
+{#                    <a href="#">已有账号登录</a>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{#</body>#}
+{#</html>#}
+{##}
+
+
+{% extends 'base.html' %}
+
+
+{#meta#}
+{% block meta %}
+    {{ block.super }}
+
+{% endblock %}
+
+
+{#title#}
+{% block title %}
+    <title>注册 - 博客笔记</title>
+{% endblock %}
+
+
+{#css#}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
+    <style>
+        .errorlist {
+            color: red;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="flex-center">
+        <div class="container">
+            <div class="flex-center">
+                <div class="unit-1-2 unit-1-on-mobile">
+                    <h1><a href="{% url 'blog:index' %}">注冊讀書博客</a></h1>
+                    {% if error_msg %}
+                        {{ error_msg }}
+                    {% endif %}
+                    <form class="form" action="{% url 'user:register' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% for error in userForm.errors %}
+                            {{ error }}
+                        {% endfor %}
+                        {% for field in userForm %}
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {{ field.errors }}
+                            {{ field.help_text | safe }}
+                            {#                        {% if field.help_text %}#}
+                            {#                            <p class="help text-small text-muted">{{ field.help_text|safe }}</p>#}
+                            {#                        {% endif %}#}
+                        {% endfor %}
+                        <button type="submit" class="btn btn-primary btn-block">注册</button>
+                        <input type="hidden" name="next" value="{{ next }}"/>
+                    </form>
+                    <div class="flex-center top-gap text-small">
+                        <a href="#">已有账号登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
